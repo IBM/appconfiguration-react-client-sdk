@@ -41,7 +41,7 @@ export default async function withAppConfigProvider(config: InitConfig) {
         const newProperties = appConfigClient.getProperties();
         setState((previousState) => ({ ...previousState, features: newFeatures, properties: newProperties }));
       });
-    });
+    }, []);
     return <Provider value={state}>{children}</Provider>;
   };
 }

@@ -22,5 +22,5 @@ import useProperties from './useProperties';
 import useProperty from './useProperty';
 
 export {
-  withAppConfigProvider, withAppConfigConsumer, useFeature, useFeatures, useProperty, useProperties,
+    withAppConfigProvider, withAppConfigConsumer, useFeature, useFeatures, useProperty, useProperties,
 };

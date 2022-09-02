@@ -19,8 +19,8 @@ import React from 'react';
 import { AppConfigContext, Consumer } from './context';
 
 export interface AppConfigProps {
-    features?: any;
-    properties?: any;
+  features?: any;
+  properties?: any;
 }
 
 function withAppConfigConsumer() {
@@ -28,7 +28,9 @@ function withAppConfigConsumer() {
     return function (props: P) {
       return (
         <Consumer>
-          {({ features, properties }: AppConfigContext) => <WrappedComponent features={features} properties={properties} {...props} />}
+          {({ features, properties }: AppConfigContext) => (
+            <WrappedComponent features={features} properties={properties} {...props} />
+          )}
         </Consumer>
       );
     };
