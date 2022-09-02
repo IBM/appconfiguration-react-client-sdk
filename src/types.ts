@@ -15,9 +15,9 @@
  */
 
 export interface InitConfig {
-    region: string;
-    guid: string;
-    apikey: string;
-    collectionId: string;
-    environmentId: string;
+  region: string;
+  guid: string;
+  apikey: string;
+  collectionId: string;
+  environmentId: string;
 }

@@ -21,7 +21,7 @@ import context from './context';
 const useFeature = (featureId: string) => {
   const { features } = useContext(context);
   if (!features[featureId]) {
-    throw new Error('App Configuration - Invalid feature flag id: ' + featureId)
+    throw new Error(`App Configuration - Invalid feature flag id: ${featureId}`);
   }
   return features[featureId];
 };

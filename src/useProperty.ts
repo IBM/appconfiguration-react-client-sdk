@@ -21,7 +21,7 @@ import context from './context';
 const useProperty = (propertyId: string) => {
   const { properties } = useContext(context);
   if (!properties[propertyId]) {
-    throw new Error('App Configuration - Invalid property id: ' + propertyId)
+    throw new Error(`App Configuration - Invalid property id: ${propertyId}`);
   }
   return properties[propertyId];
 };

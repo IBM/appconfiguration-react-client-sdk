@@ -80,14 +80,12 @@ There might be timeout errors in the browser console related to communication to
 ```javascript
 import { useFeature } from 'ibm-appconfiguration-react-client-sdk';
 
-const feature = useFeature('online-check-in'); // feature flag can be null incase of an invalid feature id
+const feature = useFeature('featureId'); // throws error incase the featureId is invalid or doesn't exist
 
-if (feature != null) {
-  console.log(`Feature Name ${feature.getFeatureName()} `);
-  console.log(`Feature Id ${feature.getFeatureId()} `);
-  console.log(`Feature Type ${feature.getFeatureDataType()} `);
-  console.log(`Is feature enabled? ${feature.isEnabled()} `);
-}
+console.log(`Feature Name ${feature.getFeatureName()} `);
+console.log(`Feature Id ${feature.getFeatureId()} `);
+console.log(`Feature Type ${feature.getFeatureDataType()} `);
+console.log(`Is feature enabled? ${feature.isEnabled()} `);
 ```
 
 ## Get all features
@@ -96,9 +94,9 @@ if (feature != null) {
 import { useFeatures } from 'ibm-appconfiguration-react-client-sdk';
 
 const features = useFeatures();
-const feature = features['online-check-in'];
+const feature = features['featureId'];
 
-if (feature != null) {
+if (feature !== undefined) {
   console.log(`Feature Name ${feature.getFeatureName()} `);
   console.log(`Feature Id ${feature.getFeatureId()} `);
   console.log(`Feature Type ${feature.getFeatureDataType()} `);
@@ -118,6 +116,7 @@ const entityAttributes = {
   country: 'India',
 };
 
+const feature = useFeature('featureId');
 const featureValue = feature.getCurrentValue(entityId, entityAttributes);
 ```
 - entityId: Id of the Entity. This will be a string identifier related to the Entity against which the feature is evaluated. For example, an entity might be an instance of an app that runs on a mobile device, or a user accessing the web application. For any entity to interact with App Configuration, it must provide a unique entity ID.
@@ -128,13 +127,11 @@ const featureValue = feature.getCurrentValue(entityId, entityAttributes);
 ```javascript
 import { useProperty } from 'ibm-appconfiguration-react-client-sdk';
 
-const property = useProperty('check-in-charges'); // property can be null incase of an invalid property id
+const property = useProperty('propertyId'); // throws error incase the propertyId is invalid or doesn't exist
 
-if (property != null) {
-  console.log(`Property Name ${property.getPropertyName()} `);
-  console.log(`Property Id ${property.getPropertyId()} `);
-  console.log(`Property Type ${property.getPropertyDataType()} `);
-}
+console.log(`Property Name ${property.getPropertyName()} `);
+console.log(`Property Id ${property.getPropertyId()} `);
+console.log(`Property Type ${property.getPropertyDataType()} `);
 ```
 
 ## Get all properties
@@ -143,9 +140,9 @@ if (property != null) {
 import { useProperties } from 'ibm-appconfiguration-react-client-sdk';
 
 const properties = useProperties();
-const property = properties['check-in-charges'];
+const property = properties['propertyId'];
 
-if (property != null) {
+if (property !== undefined) {
   console.log(`Property Name ${property.getPropertyName()} `);
   console.log(`Property Id ${property.getPropertyId()} `);
   console.log(`Property Type ${property.getPropertyDataType()} `);
@@ -164,6 +161,7 @@ const entityAttributes = {
   country: 'India',
 };
 
+const property = useProperty('propertyId');
 const propertyValue = property.getCurrentValue(entityId, entityAttributes);
 ```
 - entityId: Id of the Entity. This will be a string identifier related to the Entity against which the property is evaluated. For example, an entity might be an instance of an app that runs on a mobile device, or a user accessing the web application. For any entity to interact with App Configuration, it must provide a unique entity ID.

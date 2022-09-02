@@ -18,9 +18,9 @@ import AppConfiguration from 'ibm-appconfiguration-js-client-sdk';
 import { createContext } from 'react';
 
 interface AppConfigContext {
-    appConfigClient?: AppConfiguration;
-    features?: any; // Todo: change the any type
-    properties?: any; // Todo: change the any type
+  appConfigClient?: AppConfiguration;
+  features?: any; // Todo: change the any type
+  properties?: any; // Todo: change the any type
 }
 
 const context = createContext<AppConfigContext>({ appConfigClient: undefined, features: {}, properties: {} });
