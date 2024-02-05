@@ -26,7 +26,7 @@ The SDK is compatible with React version 16.8.0 and higher. This SDK builds on A
 
 Install the SDK.
 ```sh
-npm install ibm-appconfiguration-react-client-sdk@latest
+npm install ibm-appconfiguration-react-client-sdk
 ```
 
 ## Initialize SDK
@@ -69,11 +69,6 @@ import { withAppConfigProvider } from 'ibm-appconfiguration-react-client-sdk';
 :red_circle: **Important** :red_circle:
 
 Ensure to create the service credentials of the role **`Client SDK`** for using with the React SDK. API key of the **`Client SDK`** role has minimal access permissions that are suitable to use in browser based applications.
-
-
-**Important**
-
-There might be timeout errors in the browser console related to communication to the App Configuration backend, while using with the SDK. This is expected as part of the limitation of the streaming API and can be ignored.  
 
 ## Get single feature
 
@@ -175,13 +170,13 @@ format accordingly as shown in the below table.
 
 <details><summary>View Table</summary>
 
-| **Feature or Property value**                                                                          | **DataType** | **DataFormat** | **Type of data returned <br> by `getCurrentValue()`** | **Example output**                                                   |
-| ------------------------------------------------------------------------------------------------------ | ------------ | -------------- | ----------------------------------------------------- | -------------------------------------------------------------------- |
-| `true`                                                                                                 | BOOLEAN      | not applicable | `boolean`                                                | `true`                                                               |
-| `25`                                                                                                   | NUMERIC      | not applicable | `number`                                             | `25`                                                                 |
-| "a string text"                                                                                        | STRING       | TEXT           | `string`                                              | `a string text`                                                      |
-| <pre>{<br>  "firefox": {<br>    "name": "Firefox",<br>    "pref_url": "about:config"<br>  }<br>}</pre> | STRING       | JSON           | `JSON object`                              | `{"firefox":{"name":"Firefox","pref_url":"about:config"}}` |
-| <pre>men:<br>  - John Smith<br>  - Bill Jones<br>women:<br>  - Mary Smith<br>  - Susan Williams</pre>  | STRING       | YAML           | `string`                              | `"men:\n  - John Smith\n  - Bill Jones\nwomen:\n  - Mary Smith\n  - Susan Williams"` |
+| **Feature or Property value**                                                                          | **DataType** | **DataFormat** | **Type of data returned <br> by `getCurrentValue()`** | **Example output**                                                                   |
+| ------------------------------------------------------------------------------------------------------ | ------------ | -------------- | ----------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `true`                                                                                                 | BOOLEAN      | not applicable | `boolean`                                             | `true`                                                                               |
+| `25`                                                                                                   | NUMERIC      | not applicable | `number`                                              | `25`                                                                                 |
+| "a string text"                                                                                        | STRING       | TEXT           | `string`                                              | `a string text`                                                                      |
+| <pre>{<br>  "firefox": {<br>    "name": "Firefox",<br>    "pref_url": "about:config"<br>  }<br>}</pre> | STRING       | JSON           | `JSON object`                                         | `{"firefox":{"name":"Firefox","pref_url":"about:config"}}`                           |
+| <pre>men:<br>  - John Smith<br>  - Bill Jones<br>women:<br>  - Mary Smith<br>  - Susan Williams</pre>  | STRING       | YAML           | `string`                                              | `"men:\n  - John Smith\n  - Bill Jones\nwomen:\n  - Mary Smith\n  - Susan Williams"` |
 </details>
 
 <details><summary>Feature flag usage Example</summary>
