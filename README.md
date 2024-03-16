@@ -59,6 +59,7 @@ import { withAppConfigProvider } from 'ibm-appconfiguration-react-client-sdk';
     - `eu-gb` for London
     - `au-syd` for Sydney
     - `us-east` for Washington DC
+    - `eu-de` for Frankfurt
 - guid : Instance Id of the App Configuration service. Obtain it from the service credentials section of the App
   Configuration dashboard.
 - apikey : ApiKey of the App Configuration service. Obtain it from the service credentials section of the App
