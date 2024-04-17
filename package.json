@@ -1,6 +1,6 @@
 {
   "name": "ibm-appconfiguration-react-client-sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "IBM Cloud App Configuration React Client SDK",
   "keywords": [
     "react",
@@ -28,7 +28,7 @@
     "lint:fix": "npx eslint src/* --fix"
   },
   "dependencies": {
-    "ibm-appconfiguration-js-client-sdk": "^0.1.0"
+    "ibm-appconfiguration-js-client-sdk": "^0.1.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

@@ -76,12 +76,14 @@ Ensure to create the service credentials of the role **`Client SDK`** for using 
 ```javascript
 import { useFeature } from 'ibm-appconfiguration-react-client-sdk';
 
-const feature = useFeature('featureId'); // throws error incase the featureId is invalid or doesn't exist
+const feature = useFeature('featureId'); // returns undefined incase the featureId is invalid or doesn't exist
 
-console.log(`Feature Name ${feature.getFeatureName()} `);
-console.log(`Feature Id ${feature.getFeatureId()} `);
-console.log(`Feature Type ${feature.getFeatureDataType()} `);
-console.log(`Is feature enabled? ${feature.isEnabled()} `);
+if (feature !== undefined) {
+  console.log(`Feature Name ${feature.getFeatureName()} `);
+  console.log(`Feature Id ${feature.getFeatureId()} `);
+  console.log(`Feature Type ${feature.getFeatureDataType()} `);
+  console.log(`Is feature enabled? ${feature.isEnabled()} `);
+}
 ```
 
 ## Get all features
@@ -123,11 +125,13 @@ const featureValue = feature.getCurrentValue(entityId, entityAttributes);
 ```javascript
 import { useProperty } from 'ibm-appconfiguration-react-client-sdk';
 
-const property = useProperty('propertyId'); // throws error incase the propertyId is invalid or doesn't exist
+const property = useProperty('propertyId'); // returns undefined incase the propertyId is invalid or doesn't exist
 
-console.log(`Property Name ${property.getPropertyName()} `);
-console.log(`Property Id ${property.getPropertyId()} `);
-console.log(`Property Type ${property.getPropertyDataType()} `);
+if (property !== undefined) {
+  console.log(`Property Name ${property.getPropertyName()} `);
+  console.log(`Property Id ${property.getPropertyId()} `);
+  console.log(`Property Type ${property.getPropertyDataType()} `);
+}
 ```
 
 ## Get all properties
@@ -162,6 +166,39 @@ const propertyValue = property.getCurrentValue(entityId, entityAttributes);
 ```
 - entityId: Id of the Entity. This will be a string identifier related to the Entity against which the property is evaluated. For example, an entity might be an instance of an app that runs on a mobile device, or a user accessing the web application. For any entity to interact with App Configuration, it must provide a unique entity ID.
 - entityAttributes: A JSON object consisting of the attribute name and their values that defines the specified entity. This is an optional parameter if the property is not configured with any targeting definition. If the targeting is configured, then entityAttributes should be provided for the rule evaluation. An attribute is a parameter that is used to define a segment. The SDK uses the attribute values to determine if the specified entity satisfies the targeting rules, and returns the appropriate property value.
+
+## Using fallback values with the React Client SDK
+
+In case of a connection error with the App Configuration, the SDK relies on the most recently assessed flag values retained in memory. However, if no prior values exist in memory, it's advisable for users to establish fallback values within their code, ensuring smooth operation. An example showcasing this fallback approach is provided below.
+
+```javascript
+
+import { useFeatures } from 'ibm-appconfiguration-react-client-sdk';
+
+export default function App {
+  const features = useFeatures();
+  const defaultFlagValues = {
+    'flight-booking': false
+  }
+  const entityId = 'john_doe';
+  const entityAttributes = {
+    city: 'Bangalore',
+    country: 'India',
+  };
+
+  const getAppConfigurationFlags = (featureID, features) => {
+    if (Object.keys(features).length === 0 && features.constructor === Object) {
+      return defaultFlagValues[featureID];
+    }
+    
+    return feature[featureID]
+      ? feature[featureID].getCurrentValue(entityId, entityAttributes)
+      : defaultFlagValues[featureID];
+  };
+
+  return getAppConfigurationFlags('flight-booking', features) ? <div>Flight Booking</div> : '';
+}
+```
 
 ## Supported Data types
 
