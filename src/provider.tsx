@@ -26,17 +26,28 @@ export default async function withAppConfigProvider(config: InitConfig) {
   } = config;
   const appConfigClient = AppConfiguration.getInstance();
   appConfigClient.init(region, guid, apikey);
-  await appConfigClient.setContext(collectionId, environmentId);
+  let hasError = false;
+
+  try {
+    await appConfigClient.setContext(collectionId, environmentId);
+  } catch {
+    hasError = true;
+  }
 
   return function ({ children }: { children: ReactNode }) {
     const [state, setState] = useState({
       appConfigClient,
-      features: appConfigClient.getFeatures(),
-      properties: appConfigClient.getProperties(),
+      features:  hasError? {} : appConfigClient.getFeatures(),
+      properties: hasError? {} : appConfigClient.getProperties(),
     });
 
     useEffect(() => {
       appConfigClient.emitter.on('configurationUpdate', () => {
+        const newFeatures = appConfigClient.getFeatures();
+        const newProperties = appConfigClient.getProperties();
+        setState((previousState) => ({ ...previousState, features: newFeatures, properties: newProperties }));
+      });
+      appConfigClient.emitter.on('registration', () => {
         const newFeatures = appConfigClient.getFeatures();
         const newProperties = appConfigClient.getProperties();
         setState((previousState) => ({ ...previousState, features: newFeatures, properties: newProperties }));
