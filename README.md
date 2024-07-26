@@ -1,5 +1,5 @@
 # IBM App Configuration React Client SDK
-IBM Cloud App Configuration React Client SDK is used to perform feature flag and property evaluation in web applications based on the configuration on IBM Cloud App Configuration service.
+IBM Cloud App Configuration React Client SDK is used to perform feature flag and property evaluation in web applications and track custom metrics for Experimentation based on the configuration on IBM Cloud App Configuration service.
 
 ## Table of Contents
 
@@ -16,8 +16,7 @@ environments.
 
 Instrument your web applications with App Configuration React Client SDK, and use the App Configuration dashboard, CLI or API to
 define feature flags or properties, organized into collections and targeted to segments. Toggle feature flag states in
-the cloud to activate or deactivate features in your application or environment, when required. You can also manage the
-properties for distributed applications centrally.
+the cloud to activate or deactivate features in your application or environment, when required. Run experiments and measure the effect of feature flags on end users by tracking custom metrics. You can also manage the properties for distributed applications centrally.
 
 ## Compatibility
 The SDK is compatible with React version 16.8.0 and higher. This SDK builds on App Configuration JavaScript Client SDK to provide a better integration for use in React applications. As a result, much of the App Configuration JavaScript Client SDK functionality is also available for the React Client SDK to use. Read more about App Configuration JavaScript Client SDK [from here](https://github.com/IBM/appconfiguration-js-client-sdk#readme).
@@ -119,6 +118,23 @@ const featureValue = feature.getCurrentValue(entityId, entityAttributes);
 ```
 - entityId: Id of the Entity. This will be a string identifier related to the Entity against which the feature is evaluated. For example, an entity might be an instance of an app that runs on a mobile device, or a user accessing the web application. For any entity to interact with App Configuration, it must provide a unique entity ID.
 - entityAttributes: A JSON object consisting of the attribute name and their values that defines the specified entity. This is an optional parameter if the feature flag is not configured with any targeting definition. If the targeting is configured, then entityAttributes should be provided for the rule evaluation. An attribute is a parameter that is used to define a segment. The SDK uses the attribute values to determine if the specified entity satisfies the targeting rules, and returns the appropriate feature flag value.
+
+## Send custom metrics
+
+Record custom metrics using the `useTrack` hook in experimentation.
+
+```javascript
+import { useTrack } from 'ibm-appconfiguration-react-client-sdk';
+
+export default MyComponent = function () {
+    const trackEvent = useTrack();
+    return (
+        <button onClick={() => trackEvent('clicked', 'user123')}>Buy</button>
+    )
+}
+```
+With the `useTrack` hook you can get access to the regular `track` method of the client whose signature is `track(eventKey, entityId)` where
+- eventKey: The event key for the metric associated with the running experiment. The event key in your metric and the event key in your code must match exactly.
 
 ## Get single property
 
