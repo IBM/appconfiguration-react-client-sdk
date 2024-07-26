@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import withAppConfigConsumer from './consumer';
-import withAppConfigProvider from './provider';
-import useFeature from './useFeature';
-import useFeatures from './useFeatures';
-import useProperties from './useProperties';
-import useProperty from './useProperty';
-import useTrack from './useTrack';
+import { useContext } from 'react';
 
-export {
-    withAppConfigProvider, withAppConfigConsumer, useFeature, useFeatures, useProperty, useProperties, useTrack,
+import context from './context';
+
+const useTrack = (): ((eventKey: string, entityId: string) => void) => {
+  const { appConfigClient } = useContext(context);
+  return (eventKey, entityId) => {
+    appConfigClient?.track(eventKey, entityId);
+  }
 };
+
+export default useTrack;
