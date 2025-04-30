@@ -38,7 +38,7 @@ import { withAppConfigProvider } from 'ibm-appconfiguration-react-client-sdk';
 
 (async () => {
   const AppConfigProvider = await withAppConfigProvider({
-    region: 'us-south',
+    region: '<region>',
     guid: '<guid>',
     apikey: '<apikey>',
     collectionId: 'airlines-webapp',
@@ -54,12 +54,8 @@ import { withAppConfigProvider } from 'ibm-appconfiguration-react-client-sdk';
 })();
 ```
 
-- region : Region name where the App Configuration service instance is created. Use
-    - `us-south` for Dallas
-    - `eu-gb` for London
-    - `au-syd` for Sydney
-    - `us-east` for Washington DC
-    - `eu-de` for Frankfurt
+- region : Region name where the App Configuration service instance is created.
+  See list of supported locations [here](https://cloud.ibm.com/catalog/services/app-configuration). Eg:- `us-south`, `au-syd` etc.
 - guid : Instance Id of the App Configuration service. Obtain it from the service credentials section of the App
   Configuration dashboard.
 - apikey : ApiKey of the App Configuration service. Obtain it from the service credentials section of the App
