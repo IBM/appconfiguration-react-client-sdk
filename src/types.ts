@@ -20,4 +20,5 @@ export interface InitConfig {
   apikey: string;
   collectionId: string;
   environmentId: string;
+  clientInRestrictedNetwork?: boolean;
 }

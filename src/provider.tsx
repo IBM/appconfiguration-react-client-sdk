@@ -22,9 +22,12 @@ import { InitConfig } from './types';
 
 export default async function withAppConfigProvider(config: InitConfig) {
   const {
-    region, guid, apikey, collectionId, environmentId,
+    region, guid, apikey, collectionId, environmentId, clientInRestrictedNetwork,
   } = config;
   const appConfigClient = AppConfiguration.getInstance();
+  if (clientInRestrictedNetwork) {
+    appConfigClient.setClientInRestrictedNetwork();
+  }
   appConfigClient.init(region, guid, apikey);
   let hasError = false;
 
